@@ -1,38 +1,125 @@
-.App {
+/* --- 기존 깃허브 레이아웃 코드 (수정 없이 그대로 두시면 됩니다) --- */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+body { background-color: #f6f8fa; color: #24292f; -webkit-font-smoothing: antialiased; }
+.app-container { min-height: 100vh; display: flex; flex-direction: column; }
+.github-header { background-color: #24292f; color: #ffffff; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header-logo { font-size: 1.25rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.nav-btn { background: transparent; color: #ffffff; border: none; font-size: 0.95rem; font-weight: 600; margin-left: 16px; cursor: pointer; opacity: 0.8; transition: opacity 0.2s; }
+.nav-btn:hover { opacity: 1; }
+.github-main { flex: 1; width: 100%; max-width: 1200px; margin: 40px auto; padding: 0 24px; }
+.content-card { background-color: #ffffff; border: 1px solid #d0d7de; border-radius: 6px; padding: 40px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); min-height: 500px; overflow: hidden; }
+.main-title { font-size: 2rem; font-weight: 600; margin-bottom: 16px; color: #0969da; }
+.sub-title { font-size: 1.1rem; color: #57606a; margin-bottom: 40px; line-height: 1.5; }
+button { cursor: pointer; border-radius: 6px; font-weight: 600; transition: all 0.2s; }
+.action-buttons { display: flex; gap: 16px; }
+.row-layout { justify-content: flex-start; }
+.large-btn { padding: 12px 24px; font-size: 1.1rem; }
+.btn-primary { background-color: #2da44e; color: white; border: 1px solid rgba(27, 31, 36, 0.15); padding: 8px 16px; }
+.btn-primary:hover { background-color: #2c974b; }
+.btn-secondary { background-color: #f6f8fa; color: #24292f; border: 1px solid rgba(27, 31, 36, 0.15); padding: 8px 16px; }
+.btn-secondary:hover { background-color: #f3f4f6; border-color: rgba(27, 31, 36, 0.15); }
+.progress-header { margin-bottom: 30px; }
+.progress-text { font-size: 0.9rem; color: #57606a; font-weight: 600; display: block; margin-bottom: 8px; }
+.progress-bar-bg { width: 100%; height: 8px; background: #eaeef2; border-radius: 4px; overflow: hidden; }
+.quiz-question { font-size: 1.5rem; margin-bottom: 32px; line-height: 1.4; }
+.options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.badge { display: inline-block; background-color: #ddf4ff; color: #0969da; padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 0.9rem; margin-bottom: 16px; }
+.result-title { font-size: 2.2rem; margin-bottom: 16px; }
+.result-desc { font-size: 1.2rem; line-height: 1.6; color: #57606a; max-width: 600px; }
+.mt-4 { margin-top: 40px; }
+.tetris-wrapper { display: flex; align-items: flex-start; justify-content: center; gap: 60px; padding-top: 20px; }
+.tetris-info-panel { display: flex; flex-direction: column; width: 200px; }
+.score-box { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; text-align: center; margin-bottom: 24px; }
+.score-box span { display: block; font-size: 0.85rem; color: #57606a; margin-bottom: 4px; }
+.score-box strong { font-size: 1.8rem; color: #2da44e; }
+.controls-box { background: #ffffff; border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; font-size: 0.9rem; color: #57606a; }
+.controls-box p { margin-bottom: 8px; }
+.controls-box p:last-child { margin-bottom: 0; }
+.game-over-text { color: #cf222e; font-weight: 600; font-size: 1.2rem; margin-top: 20px; text-align: center; }
+.tetris-board-container { padding: 10px; background-color: #eaeef2; border-radius: 8px; border: 1px solid #d0d7de; }
+.tetris-board { display: grid; grid-template-rows: repeat(20, 30px); grid-template-columns: repeat(10, 30px); background-color: #ffffff; border: 1px solid #d0d7de; }
+.tetris-cell { width: 30px; height: 30px; box-sizing: border-box; border: 1px solid rgba(0,0,0,0.05); border-radius: 2px; }
+@media (max-width: 768px) { .options-grid { grid-template-columns: 1fr; } .tetris-wrapper { flex-direction: column; align-items: center; gap: 30px; } .tetris-info-panel { width: 100%; text-align: center; } .tetris-board { grid-template-rows: repeat(20, 25px); grid-template-columns: repeat(10, 25px); } .tetris-cell { width: 25px; height: 25px; } }
+
+
+/* =========================================
+   ✨ 여기서부터 화려한 애니메이션 & 디자인 업그레이드 ✨
+   ========================================= */
+
+/* 1. 페이드 & 슬라이드 애니메이션 키프레임 */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in { animation: fadeIn 0.4s ease-out forwards; }
+.fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
+
+/* 2. 질문이 넘어갈 때마다 실행되는 애니메이션 래퍼 */
+.question-animate-wrapper {
+  animation: fadeInUp 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+/* 3. 쫀득한 심리테스트 선택지 버튼 (누르는 맛 강화!) */
+.btn-option {
+  background: #ffffff;
+  border: 2px solid #e1e4e8; /* 기본 테두리를 살짝 도톰하게 */
+  color: #24292f;
+  padding: 24px 20px;
+  font-size: 1.05rem;
+  text-align: left;
+  line-height: 1.5;
+  border-radius: 12px; /* 살짝 더 둥글게 */
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  position: relative;
+}
+
+/* 마우스 올렸을 때: 살짝 떠오르며 파란 테두리와 그림자 */
+.btn-option:hover {
+  border-color: #0969da;
+  background-color: #f3f8ff; /* 깃허브 파란색 톤 */
+  transform: translateY(-4px); 
+  box-shadow: 0 8px 16px rgba(9, 105, 218, 0.12);
+}
+
+/* 마우스 클릭 시: 꾹 눌리는 찰진 느낌! */
+.btn-option:active {
+  transform: scale(0.96) translateY(0);
+  box-shadow: 0 2px 4px rgba(9, 105, 218, 0.1);
+  background-color: #e5f0ff;
+}
+
+/* 4. 프로그레스 바 그라데이션 및 부드러운 차오름 효과 */
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0969da, #3182ce); /* 그라데이션 적용 */
+  box-shadow: 0 0 10px rgba(9, 105, 218, 0.4); /* 끝부분 네온 효과 */
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* 튕기듯이 부드럽게 차오름 */
+  border-radius: 4px;
+}
+
+/* 5. 공통 버튼들 (시작하기, 결과공유 등) 통통 튀는 애니메이션 */
+.pop-button:active {
+  transform: scale(0.94);
+}
+
+/* 홈 뷰 큰 로고 비율 최적화 스타일 */
+.main-logo-container {
+  margin-bottom: 30px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-logo-image {
+  max-width: 400px; /* 크게 ( image_11.png와 일치하도록) */
+  width: 100%; /* 컨테이너 너비에 맞게 조정 */
+  height: auto; /* 비율 깨지지 않게 최적화 (핵심!) */
+  object-fit: contain; /* 비율 유지 */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 약간의 그림자 (image_11.png와 일치하도록) */
 }

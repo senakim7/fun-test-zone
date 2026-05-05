@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# 🚀 일상 생존 유형 심리테스트 & 테트리스 웹
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. 시스템 소개
+생성형 AI의 도움을 받아 기획 및 구현된 **React 기반 싱글 페이지 애플리케이션(SPA)**입니다. 스니커즈 수집, 모바일 게임, 영상 편집 등 일상적인 취미 소재를 바탕으로 한 10문항(4지 선다)의 심리테스트와 브라우저 미니게임(테트리스)을 한 공간에서 제공합니다. 백엔드 서버 없이 프론트엔드 로직만으로 동작하여 S3 정적 웹 호스팅에 최적화되어 있습니다.
 
-## Available Scripts
+## 2. 주요 기능
+* **10문항 4지선다 MBTI 테스트:** 사용자가 선택한 답변에 따라 E/I, S/N, T/F, J/P 점수를 실시간으로 누적하여 최종 16가지 성향 중 하나를 도출합니다.
+* **공유하기 API 연동:** Web Share API를 활용하여 모바일 기기에서 카카오톡이나 SNS로 결과를 바로 공유할 수 있습니다.
+* **미니 테트리스 게임:** `useEffect`와 `setInterval`을 이용한 게임 루프 및 키보드 이벤트 리스너를 통해 가벼운 미니게임을 제공합니다.
 
-In the project directory, you can run:
+## 3. 프로젝트 폴더 구조
+```text
+FUN-TEST-ZONE/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml        # GitHub Actions CI/CD 파이프라인
+├── public/
+│   ├── index.html            # 메인 HTML 템플릿
+│   └── favicon.ico
+├── src/
+│   ├── App.css               # 블로그 감성의 모바일 반응형 UI 스타일링
+│   ├── App.js                # 심리테스트 및 테트리스 핵심 로직
+│   └── index.js              # React 진입점
+├── package.json              # 패키지 의존성 관리
+└── README.md
 
-### `npm start`
+## 🚀 주요 기능
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. 개발자 생존 유형 테스트 (심리테스트)
+- **MBTI 방식의 로직**: 12개의 객관식 질문을 통해 사용자의 성향을 4가지 차원(E/I, S/N, T/F, J/P)으로 분석합니다.
+- **16가지 결과**: 분석된 성향을 바탕으로 '철저한 코드 검수관', '전략가 풀스택 개발자' 등 개발자 맞춤형 캐릭터 결과를 제공합니다.
+- **React State 관리**: `useState`를 활용하여 질문 진행 상태와 점수를 실시간으로 관리하고 결과를 도출합니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 2. 테트리스(Tetris) 미니게임
+- **핵심 로직 구현**: 2D 그리드 보드 위에서 블록의 생성, 이동, 회전, 충돌 감지 로직을 순수 JavaScript/React로 구현했습니다.
+- **줄 삭제 및 점수**: 한 줄이 모두 채워지면 해당 줄이 삭제되며 점수가 올라가는 기능을 포함합니다.
+- **반응형 디자인**: 모바일과 PC 환경 모두에서 원활하게 플레이할 수 있도록 CSS 미디어 쿼리를 적용했습니다.
 
-### `npm test`
+## 🛠 CI/CD 환경 구축 (GitHub Actions)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+본 프로젝트는 GitHub Actions를 활용하여 `main` 브랜치에 코드가 Push 될 때마다 AWS S3로 자동 빌드 및 배포되도록 설정되었습니다.
 
-### `npm run build`
+- **워크플로우 단계**:
+  1. `Checkout`: GitHub 레포지토리의 코드를 가져옵니다.
+  2. `Node.js Setup`: 빌드 환경을 구성합니다.
+  3. `Build`: `npm run build`를 통해 배포용 정적 파일을 생성합니다.
+  4. `AWS Credentials`: AWS Academy 환경을 고려하여 `AWS_SESSION_TOKEN`을 포함한 인증을 수행합니다.
+  5. `S3 Sync`: 빌드된 결과물을 S3 버킷과 동기화하여 실시간 배포를 완료합니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🔗 링크
+- **AWS S3 호스팅 URL**: (빈칸)
+- **CI/CD 구축 시연 영상 (YouTube)**: (빈칸)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+*본 프로젝트는 학습 목적으로 제작되었습니다.*
