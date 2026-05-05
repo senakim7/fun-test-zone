@@ -24,6 +24,8 @@ FUN-TEST-ZONE/
 ├── package.json              # 패키지 의존성 관리
 └── README.md
 
+
+
 ## 🚀 주요 기능
 
 ### 1. 개발자 생존 유형 테스트 (심리테스트)
