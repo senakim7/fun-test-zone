@@ -49,11 +49,10 @@ FUN-TEST-ZONE/
   4. `AWS Credentials`: AWS Academy 환경을 고려하여 `AWS_SESSION_TOKEN`을 포함한 인증을 수행합니다.
   5. `S3 Sync`: 빌드된 결과물을 S3 버킷과 동기화하여 실시간 배포를 완료합니다.
 
-## 🔗 링크
+## 🔗 링크 및 시연 영상
 - **AWS S3 호스팅 URL**: [배포된 웹사이트 바로가기](https://mybucket-20263597.s3.us-east-1.amazonaws.com/index.html)
 - **AWS Amplify 호스팅 URL**: [Amplify 배포 바로가기](https://main.d1j8rlxxcs2rg4.amplifyapp.com/)
-
-- **CI/CD 구축 시연 영상 (YouTube)**: (빈칸)
-
+- **과제 1 (GitHub Actions CI/CD 구축 시연)**: [유튜브 영상 보기](https://youtu.be/sOm1V6mHiM8)
+- **과제 2 (AWS Amplify 자동 배포 시연)**: [유튜브 영상 보기](https://youtu.be/iCG_AqGA-aE)
 ---
 *본 프로젝트는 학습 목적으로 제작되었습니다.*
