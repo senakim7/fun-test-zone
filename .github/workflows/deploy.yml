@@ -34,4 +34,4 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync ./build s3://내-버킷-이름 --delete
+          aws s3 sync ./build s3://mybucket-20263597 --delete
