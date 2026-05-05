@@ -48,8 +48,8 @@ FUN-TEST-ZONE/
   5. `S3 Sync`: 빌드된 결과물을 S3 버킷과 동기화하여 실시간 배포를 완료합니다.
 
 ## 🔗 링크
-- **AWS S3 호스팅 URL**: https://mybucket-20263597.s3.us-east-1.amazonaws.com/index.html
-- **AWS Amplfiy 호스팅 URL**: (https://main.d1j8rlxxcs2rg4.amplifyapp.com/)
+- **AWS S3 호스팅 URL**: [배포된 웹사이트 바로가기](https://mybucket-20263597.s3.us-east-1.amazonaws.com/index.html)
+- **AWS Amplify 호스팅 URL**: [Amplify 배포 바로가기](https://main.d1j8rlxxcs2rg4.amplifyapp.com/)
 
 - **CI/CD 구축 시연 영상 (YouTube)**: (빈칸)
 
